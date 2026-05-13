@@ -17,6 +17,15 @@ void Oyun::olaylar() {
         }
 
         window.clear(sf::Color(187, 173, 160)); // arka plan rengi 
-        window.display(); // cizdirdiklerimizi gosterecek
+
+         for(int satir=0; satir<4; satir++){
+       for(int sutun=0; sutun<4; sutun++){
+        sf::RectangleShape kare(sf::Vector2f(150, 150)); // her karenin boyutu
+          kare.setPosition(sutun * 170 + 25, satir * 170 + 25);   // kareler arası bosluk
+          window.draw(kare);
+       }
     }
+
+        window.display(); // cizdirdiklerimizi gosterecek
+}
 }

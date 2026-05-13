@@ -4,6 +4,9 @@
 class Tahta{
     public:
     Tahta();
+    int matris[4][4];
+    int skor;
+    void sifirla();
 };
 
 #endif

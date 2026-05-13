@@ -10,8 +10,7 @@ private:
       
 public:
     Oyun();     
-    void olaylar();   
-    void calistir(); 
+    void olaylar(); 
 };
 
 #endif
