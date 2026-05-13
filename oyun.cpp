@@ -17,8 +17,8 @@ void Oyun::olaylar() {
     while (window.isOpen()) {
         sf::Event olay;
         while (window.pollEvent(olay)) {// kapatma tuşuna basılırsa
-            if (olay.type == sf::Event::Closed)
-                window.close();
+            if (olay.type == sf::Event::Closed){
+                window.close();}
             }
 
         window.clear(sf::Color(187, 173, 160)); // arka plan rengi 
