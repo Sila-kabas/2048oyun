@@ -1,6 +1,7 @@
 #include "tahta.hpp"
 #include <ctime>
 #include <cstdlib>
+#include <iostream>
 
 Tahta::Tahta(){
     sifirla();
