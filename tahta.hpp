@@ -2,11 +2,13 @@
 #define TAHTA_HPP
 
 class Tahta{
-    public:
-    Tahta();
+private:
     int matris[4][4];
     int skor;
+public:
+    Tahta();
     void sifirla();
+    void rastgeleSayiEkle();
 };
 
 #endif
