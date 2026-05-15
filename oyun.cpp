@@ -18,8 +18,30 @@ void Oyun::olaylar() {
         sf::Event olay;
         while (window.pollEvent(olay)) {// kapatma tuşuna basılırsa
             if (olay.type == sf::Event::Closed){
-                window.close();}
+                window.close();
             }
+
+        if(olay.type==sf::Event::KeyPressed){
+                if(olay.key.code==sf::Keyboard::Left){
+                        tahta.solaKaydir();
+                        tahta.rastgeleSayiEkle();
+
+                 }
+                else if(olay.key.code==sf::Keyboard::Right){
+                        tahta.sagaKaydir();
+                        tahta.rastgeleSayiEkle();
+                }
+                else if(olay.key.code==sf::Keyboard::Down){
+                        tahta.asagiKaydir();
+                        tahta.rastgeleSayiEkle();
+                }
+                else if(olay.key.code==sf::Keyboard::Up){
+                        tahta.yukariKaydir();
+                        tahta.rastgeleSayiEkle();
+                }
+            }
+        }
+
 
         window.clear(sf::Color(187, 173, 160)); // arka plan rengi 
 
@@ -36,7 +58,7 @@ void Oyun::olaylar() {
                yazi.setCharacterSize(75);
                yazi.setFillColor(sf::Color::Black);
                yazi.setStyle(sf::Text::Bold);
-               yazi.setPosition(sutun*170+75, satir*170+45);
+               yazi.setPosition(sutun*160+75, satir*170+45);
                window.draw(yazi);
               }
             }
