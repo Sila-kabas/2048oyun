@@ -4,14 +4,16 @@
 #include "tahta.hpp"
 
 class Oyun {
-private:
-    sf::RenderWindow window;  
-    Tahta tahta;  
-    sf::Font font;    
-      
-public:
-    Oyun();     
-    void olaylar(); 
-};
+    public:
+    sf::RenderWindow window;
+    Tahta tahta;
+    sf::Font font;
 
+    Oyun();
+    void calistir();
+    void olaylar();
+    void ciz();
+    bool bittiMi=false;
+
+};
 #endif

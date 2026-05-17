@@ -1,69 +1,98 @@
-#include <SFML/Graphics.hpp>
 #include "oyun.hpp"
 #include <string>
 #include <iostream>
 
-
-Oyun::Oyun() : window(sf::VideoMode(700,700), "2048 Oyunu"){ //pencere olusturdum
+Oyun::Oyun() : window(sf::VideoMode(700,700), "2048 oyunu"){ //pencere acma
     window.setFramerateLimit(60);
-
-     if (!font.loadFromFile("arial.ttf")) {
-        std::cout << "HATA: Font hiçbir adreste bulunamadı!" << std::endl;
+    // Önce bir üst klasörde ara, bulamazsa olduğu klasörde ara
+if (!font.loadFromFile("../arial.ttf")) {
+    if (!font.loadFromFile("arial.ttf")) {
     }
-        
 }
+    font.loadFromFile("arial.ttf");
+    tahta.sifirla();
+    }
 
-void Oyun::olaylar() {
-    while (window.isOpen()) {
-        sf::Event olay;
-        while (window.pollEvent(olay)) {// kapatma tuşuna basılırsa
-            if (olay.type == sf::Event::Closed){
+    void Oyun::olaylar(){
+        sf:: Event event;
+        while(window.pollEvent(event)){
+            if(event.type==sf::Event::Closed){
                 window.close();
             }
+ 
 
-        if(olay.type==sf::Event::KeyPressed){
-                if(olay.key.code==sf::Keyboard::Left){
+                if(event.type==sf::Event::KeyPressed){
+                    if(event.key.code==sf::Keyboard::Left){
                         tahta.solaKaydir();
                         tahta.rastgeleSayiEkle();
 
-                 }
-                else if(olay.key.code==sf::Keyboard::Right){
+                    }
+                    else if(event.key.code==sf::Keyboard::Right){
                         tahta.sagaKaydir();
                         tahta.rastgeleSayiEkle();
-                }
-                else if(olay.key.code==sf::Keyboard::Down){
+                    }
+                    else if(event.key.code==sf::Keyboard::Down){
                         tahta.asagiKaydir();
                         tahta.rastgeleSayiEkle();
-                }
-                else if(olay.key.code==sf::Keyboard::Up){
+                    }
+                    else if(event.key.code==sf::Keyboard::Up){
                         tahta.yukariKaydir();
                         tahta.rastgeleSayiEkle();
+                    }
+                if(tahta.oyunBittiMi()){
+                    std::cout<<"game over"<<std::endl;
+                    bittiMi=true;
                 }
             }
         }
-
-
-        window.clear(sf::Color(187, 173, 160)); // arka plan rengi 
-
-       for(int satir=0; satir<4; satir++){
-          for(int sutun=0; sutun<4; sutun++){
-             sf::RectangleShape kare(sf::Vector2f(150, 150)); // her karenin boyutu
-              kare.setPosition(sutun * 170 + 25, satir * 170 + 25);   // kareler arası bosluk
-             window.draw(kare);
-             
-             if(tahta.getDeger(satir,sutun)!=0){
-               sf::Text yazi;
-               yazi.setFont(font);
-               yazi.setString(std::to_string(tahta.getDeger(satir,sutun)));
-               yazi.setCharacterSize(75);
-               yazi.setFillColor(sf::Color::Black);
-               yazi.setStyle(sf::Text::Bold);
-               yazi.setPosition(sutun*160+75, satir*170+45);
-               window.draw(yazi);
-              }
-            }
-        }
-        window.display(); // cizdirdiklerimizi gosterecek
-            
     }
-  }
+
+ 
+    //cizdiren fonk
+     void Oyun::ciz(){
+     window.clear(sf::Color(187, 173, 160)); // arka plan rengi
+
+     for(int satir=0; satir<4; satir++){
+       for(int sutun=0; sutun<4; sutun++){
+        sf::RectangleShape kare(sf::Vector2f(150, 150)); // her karenin boyutu
+        kare.setPosition(sutun * 170 + 25, satir * 170 + 25);   // kareler arası bosluk
+        window.draw(kare);
+
+          if(tahta.matris[satir][sutun]!=0){
+            sf::Text yazi;
+            yazi.setFont(font);
+            yazi.setString(std::to_string(tahta.matris[satir][sutun]));
+            yazi.setCharacterSize(75);
+            yazi.setFillColor(sf::Color::Black);
+            yazi.setStyle(sf::Text::Bold);
+            yazi.setPosition(sutun*170+75, satir*170+40);
+            window.draw(yazi);
+          }
+    }
+}
+    
+    if(bittiMi){
+        sf::RectangleShape ekran(sf::Vector2f(1200, 1200)); //
+          ekran.setFillColor(sf::Color(205, 193, 180));     //
+          window.draw(ekran);
+ 
+            sf::Text bitisyazisi;
+            bitisyazisi.setFont(font);
+            bitisyazisi.setString("game over");
+            bitisyazisi.setCharacterSize(75);
+            bitisyazisi.setFillColor(sf::Color::Black);
+            bitisyazisi.setStyle(sf::Text::Bold);
+            bitisyazisi.setPosition(190,200);
+            window.draw(bitisyazisi);
+    }
+
+    window.display();//cizilenleri ekranda gosterir
+}
+ 
+    // Oyunu başlatan burası
+void Oyun::calistir(){
+    while (window.isOpen()) {
+        olaylar();
+        ciz();
+    }
+}

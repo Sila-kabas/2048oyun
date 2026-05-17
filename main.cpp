@@ -7,7 +7,7 @@ using namespace std;
 int main(){
     Oyun oyun;
 
-    oyun.olaylar();
+    oyun.calistir();
 
     return 0;
 }

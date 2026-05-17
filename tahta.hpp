@@ -1,25 +1,20 @@
 #ifndef TAHTA_HPP
 #define TAHTA_HPP
-#include <SFML/Graphics.hpp>
+#include <vector>
 
 class Tahta{
-private:
+    public:
     int matris[4][4];
     int skor;
-    sf:: Font font;
-public:
+
     Tahta();
     void sifirla();
     void rastgeleSayiEkle();
     void solaKaydir();
     void sagaKaydir();
-    void asagiKaydir();
     void yukariKaydir();
+    void asagiKaydir();
+    bool oyunBittiMi();
 
-
-    int getDeger(int satir, int sutun) {
-        return matris[satir][sutun];
-    }
 };
-
 #endif

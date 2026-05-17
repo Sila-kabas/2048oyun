@@ -1,15 +1,12 @@
 #include "tahta.hpp"
-#include <ctime>
 #include <cstdlib>
+#include <ctime>
+#include <vector>
 #include <iostream>
 
 Tahta::Tahta(){
+    srand(time(0)); // Rastgele sayı
     sifirla();
-    srand(time(0));
-
-    rastgeleSayiEkle();
-    rastgeleSayiEkle();
-
 }
 
 void Tahta::sifirla() {
@@ -19,30 +16,30 @@ void Tahta::sifirla() {
             matris[satir][sutun] = 0;
         }
     }
+    rastgeleSayiEkle();
+    rastgeleSayiEkle();
 }
-
 void Tahta::rastgeleSayiEkle(){
     int bosKareSayisi=0;
     int sayac=0;
-    for(int satir=0; satir<4; satir++) {
-        for(int sutun= 0; sutun<4; sutun++) {
-           if (matris[satir][sutun]==0){
-            bosKareSayisi++;
-           }
+    for(int satir=0; satir<4; satir++){
+        for(int sutun=0; sutun<4; sutun++){
+            if(matris[satir][sutun]==0){
+                bosKareSayisi++;
+            }
         }
     }
-
-    if (bosKareSayisi==0){//bos kare yoksa fonk kapat
-        return;
+    if (bosKareSayisi==0){
+        return; //bos kare yoksa fonk cık
     }
-
     int secilenBosKare= rand()% bosKareSayisi;
 
-    for(int satir=0; satir< 4; satir++) {
-        for(int sutun= 0; sutun <4; sutun++) {
-            if (matris[satir][sutun] ==0){
-                if(sayac==secilenBosKare){//tahtayı tarıyoruz sectigimiz kareyi bulana kadar
-                    matris[satir][sutun]=(rand()%75==0)? 4:2;
+    for(int satir=0; satir<4; satir++){
+        for(int sutun=0; sutun<4; sutun++){
+            if(matris[satir][sutun]==0){
+                if(sayac==secilenBosKare){
+                    matris[satir][sutun]= (rand()%90==0)? 4 : 2;
+                    return;
                 }
                 sayac++;
             }
@@ -51,7 +48,7 @@ void Tahta::rastgeleSayiEkle(){
 }
 
 void Tahta::solaKaydir(){
-     for(int satir=0; satir<4; satir++){ //boslukları sola kaydır
+    for(int satir=0; satir<4; satir++){ //boslukları sola kaydır
         int yazilacakYer=0;
          for(int sutun=0; sutun<4; sutun++){
             if(matris[satir][sutun]!=0){
@@ -81,7 +78,7 @@ void Tahta::solaKaydir(){
          }
     }
 
-    void Tahta::sagaKaydir(){
+void Tahta::sagaKaydir(){
     for(int satir=0; satir<4; satir++){ //boslukları saga kaydır
 
         int yazilacakYer=3;
@@ -113,7 +110,7 @@ void Tahta::solaKaydir(){
          }
     }
 
-    void Tahta::yukariKaydir(){
+void Tahta::yukariKaydir(){
     for(int sutun=0; sutun<4; sutun++){
          int yazilacakYer=0;
 
@@ -178,4 +175,28 @@ void Tahta::asagiKaydir(){
             }
         }
     }
+}
+
+bool Tahta::oyunBittiMi(){
+    std::cout<<"sorgu"<<std::endl;
+    for(int satir=0; satir<4; satir++){
+        for(int sutun=0; sutun<4; sutun++){
+            if(matris[satir][sutun]==0){
+                return false;
+            }
+        }
+    }
+
+    for(int satir=0; satir<3; satir++){
+        for(int sutun=0; sutun<3; sutun++){
+            if(matris[satir][sutun]==matris[satir][sutun+1]){
+                return false;
+            }
+            if(matris[satir][sutun]==matris[satir+1][sutun]){
+                return false;
+            }
+        }
+    }
+    std::cout<<"game over"<<std::endl;
+    return true;
 }
