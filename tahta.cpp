@@ -178,7 +178,6 @@ void Tahta::asagiKaydir(){
 }
 
 bool Tahta::oyunBittiMi(){
-    std::cout<<"sorgu"<<std::endl;
     for(int satir=0; satir<4; satir++){
         for(int sutun=0; sutun<4; sutun++){
             if(matris[satir][sutun]==0){

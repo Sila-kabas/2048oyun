@@ -56,7 +56,38 @@ if (!font.loadFromFile("../arial.ttf")) {
        for(int sutun=0; sutun<4; sutun++){
         sf::RectangleShape kare(sf::Vector2f(150, 150)); // her karenin boyutu
         kare.setPosition(sutun * 170 + 25, satir * 170 + 25);   // kareler arası bosluk
+
+         int deger=tahta.matris[satir][sutun];
+          sf::Color kareRengi;
+          if (deger == 0){
+                 kareRengi = sf::Color(205, 193, 180);}
+             else if (deger == 2){
+                 kareRengi = sf::Color(238, 228, 218);}
+             else if (deger == 4) {
+                kareRengi = sf::Color(237, 224, 200);}
+             else if (deger == 8) {
+                kareRengi = sf::Color(242, 177, 121);}
+             else if (deger == 16){
+                 kareRengi = sf::Color(245, 149, 99);}
+             else if (deger == 32) {
+                kareRengi = sf::Color(246, 124, 95);}
+             else if (deger == 64) {
+                kareRengi = sf::Color(246, 94, 59);}
+             else if (deger == 128) {
+                kareRengi = sf::Color(237, 207, 114);}
+             else if (deger == 256) {
+                kareRengi = sf::Color(237, 204, 97);}
+             else if (deger == 512) {
+                kareRengi = sf::Color(237, 200, 80);}
+             else if (deger == 1024) {
+                kareRengi = sf::Color(237, 197, 63);}
+             else if (deger == 2048) {
+                kareRengi = sf::Color(237, 194, 46);}
+             kare.setFillColor(kareRengi);
+
         window.draw(kare);
+
+        
 
           if(tahta.matris[satir][sutun]!=0){
             sf::Text yazi;
@@ -68,6 +99,8 @@ if (!font.loadFromFile("../arial.ttf")) {
             yazi.setPosition(sutun*170+75, satir*170+40);
             window.draw(yazi);
           }
+
+          
     }
 }
     
